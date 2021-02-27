@@ -1,0 +1,10 @@
+
+<h1>SPA - Single Page Application</h1>
+
+<h2>JIT - Just in Time Compilation</h2>
+<h2>AOT - Ahead of Time Compilation</h2>
+
+<button (click)="changeComponent(account.title)">Show Account</button>
+<button (click)="changeComponent(dashboard.title)">Show Dashboard</button>
+<app-account *ngIf="currentPage.title === account.title"></app-account>
+<app-dashboard *ngIf="currentPage.title === dashboard.title"></app-dashboard>
