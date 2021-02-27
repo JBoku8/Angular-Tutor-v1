@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { IProduct } from './product';
 
 @Component({
@@ -6,7 +6,7 @@ import { IProduct } from './product';
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.scss'],
 })
-export class ProductList implements OnInit {
+export class ProductList implements OnInit, OnDestroy {
   private _filterValue: string = '';
 
   showImages: boolean = false;
@@ -36,9 +36,12 @@ export class ProductList implements OnInit {
 
   constructor() {
     this.filterValue = 'Moto';
+    // set class default values
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // ajax calls
+  }
 
   // მხოლოდ get ნიშნავს read-only თვისებას
   get filterValue(): string {
@@ -61,4 +64,6 @@ export class ProductList implements OnInit {
   toggleImages(): void {
     this.showImages = !this.showImages;
   }
+
+  ngOnDestroy(): void {}
 }
