@@ -1,5 +1,16 @@
 <h3 class="text-muted">Product List</h3>
 
+<div class="row px-3">
+  <button class="btn btn-warning col-2" (click)="toggleImages()">
+    {{ showImages ? "Hide" : "Show" }} Images
+  </button>
+  <div class="col-4">
+    <input type="search" class="form-control" [(ngModel)]="filterValue" />
+  </div>
+  <div class="col-6">
+    <span>Filter By</span>: <b>{{ filterValue }}</b>
+  </div>
+</div>
 <table class="table">
   <thead>
     <tr>
@@ -10,16 +21,18 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let item of productList">
+    <tr *ngFor="let item of filteredProducts">
       <td>
         <img
           [src]="item.imageUrl"
           [alt]="item.productName"
+          [style.height.px]="imageHeight"
           class="rounded img-thumbnail"
+          *ngIf="showImages"
         />
       </td>
-      <td>{{ item.productName | uppercase }}</td>
-      <td>{{ item.productCode | lowercase | convertToSpace: "-" }}</td>
+      <td>{{ item.productName | lowercase }}</td>
+      <td>{{ item.productCode | uppercase | convertToSpace: "-" }}</td>
       <td>{{ item.price | currency: "USD":"symbol":"1.2-2" }}</td>
     </tr>
   </tbody>
