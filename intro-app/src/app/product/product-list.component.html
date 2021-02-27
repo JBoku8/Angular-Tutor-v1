@@ -1,0 +1,26 @@
+<h3 class="text-muted">Product List</h3>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Image</th>
+      <th>Product Name</th>
+      <th>Product Code</th>
+      <th>Price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of productList">
+      <td>
+        <img
+          [src]="item.imageUrl"
+          [alt]="item.productName"
+          class="rounded img-thumbnail"
+        />
+      </td>
+      <td>{{ item.productName | uppercase }}</td>
+      <td>{{ item.productCode | lowercase | convertToSpace: "-" }}</td>
+      <td>{{ item.price | currency: "USD":"symbol":"1.2-2" }}</td>
+    </tr>
+  </tbody>
+</table>
