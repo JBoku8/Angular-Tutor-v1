@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { IProduct } from './product';
+import { IProduct, ITodo } from './product';
+import { ProductService } from './product.service';
 
 @Component({
   selector: 'app-product-list',
@@ -8,39 +9,24 @@ import { IProduct } from './product';
 })
 export class ProductList implements OnInit, OnDestroy {
   private _filterValue: string = '';
-
   showImages: boolean = false;
   imageHeight: number = 100;
   filteredProducts: IProduct[] = [];
-  productList: IProduct[] = [
-    {
-      imageUrl: 'https://fdn2.gsmarena.com/vv/bigpic/xiaomi-redmi-k40.jpg',
-      productName: 'Xiaomi Redmi',
-      productCode: 'K-40',
-      price: 280.2489,
-    },
-    {
-      imageUrl: 'https://fdn2.gsmarena.com/vv/bigpic/samsung-galaxy-m02.jpg',
-      productName: 'Samsung Galaxy',
-      productCode: 'M-02',
-      price: 6.999,
-    },
-    {
-      imageUrl:
-        'https://fdn2.gsmarena.com/vv/bigpic/motorola-moto-e7-power.jpg',
-      productName: 'Motorola Moto',
-      productCode: 'E7-Power',
-      price: 90.895,
-    },
-  ];
+  productList: IProduct[] = [];
+  todoList: ITodo[] = [];
 
-  constructor() {
-    this.filterValue = 'Moto';
+  constructor(private _productService: ProductService) {
     // set class default values
   }
 
   ngOnInit(): void {
     // ajax calls
+    this.productList = this._productService.getProducts();
+    this.filterValue = '';
+
+    this._productService.getTodos().subscribe((data: ITodo[]) => {
+      this.todoList = data;
+    });
   }
 
   // მხოლოდ get ნიშნავს read-only თვისებას
@@ -65,5 +51,11 @@ export class ProductList implements OnInit, OnDestroy {
     this.showImages = !this.showImages;
   }
 
+  onRatingChange(message: number): void {
+    console.log(message);
+  }
+
   ngOnDestroy(): void {}
 }
+
+// Singleton Deisgn pattern
