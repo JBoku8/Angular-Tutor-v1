@@ -7,7 +7,7 @@ import { ProductService } from './product.service';
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.scss'],
 })
-export class ProductList implements OnInit, OnDestroy {
+export class ProductListComponent implements OnInit, OnDestroy {
   private _filterValue: string = '';
   showImages: boolean = false;
   imageHeight: number = 100;
