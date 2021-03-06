@@ -1,0 +1,16 @@
+<a [routerLink]="['/home']">Home</a>
+
+<div class="row" *ngIf="article">
+  <div class="col-6 mx-auto">
+    <a [routerLink]="['/home']">
+      <img
+        [src]="article.urlToImage"
+        class="card-img-top img-fluid"
+        [alt]="article.title"
+      />
+    </a>
+  </div>
+  <div class="col-10">
+    <p>{{ article.content }}</p>
+  </div>
+</div>
