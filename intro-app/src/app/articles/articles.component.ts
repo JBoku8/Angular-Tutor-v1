@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { ArticleService } from './article.service';
 
@@ -15,7 +15,7 @@ export class ArticlesComponent implements OnInit {
 
   ngOnInit(): void {
     this._articleService
-      .getArticles()
+      .getArticles('apple', 30, 1)
       .subscribe((response: IArticleResponse) => {
         if ((response.status = 'ok')) {
           this.articles = response.articles;

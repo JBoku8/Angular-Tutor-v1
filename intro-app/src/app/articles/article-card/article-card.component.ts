@@ -11,6 +11,6 @@ export class ArticleCardComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    console.log(this.article);
+    // console.log(this.article);
   }
 }
