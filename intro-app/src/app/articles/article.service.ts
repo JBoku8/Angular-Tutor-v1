@@ -16,14 +16,10 @@ export class ArticleService {
 
   constructor(private http: HttpClient) {}
 
-  getArticles(
-    query: string,
-    pageSize: number,
-    page: number
-  ): Observable<IArticleResponse> {
+  getArticles(query: string): Observable<IArticleResponse> {
     return this.http
       .get<IArticleResponse>(
-        `${this.baseUrl}/everything?apiKey=${this.apiKey}&q=${query}&pageSize=${pageSize}&page=${page}&sortBy=popularity`
+        `${this.baseUrl}/everything?apiKey=${this.apiKey}&${query}`
       )
       .pipe(tap(null, catchError(this.handleError)));
   }
