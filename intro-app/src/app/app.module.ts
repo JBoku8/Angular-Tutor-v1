@@ -16,6 +16,7 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { ArticlesComponent } from './articles/articles.component';
 import { ArticleCardComponent } from './articles/article-card/article-card.component';
 import { ArticleDetailComponent } from './articles/article-detail/article-detail.component';
+import { AuthGuard } from './auth.guard';
 
 @NgModule({
   declarations: [
@@ -44,10 +45,12 @@ import { ArticleDetailComponent } from './articles/article-detail/article-detail
       {
         path: 'dashboard',
         component: DashboardComponent,
+        canActivate: [AuthGuard],
       },
       {
         path: 'account',
         component: AccountComponent,
+        canActivate: [AuthGuard],
       },
       {
         path: 'home',

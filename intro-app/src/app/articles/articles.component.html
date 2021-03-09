@@ -1,6 +1,81 @@
 <section class="row mt-5">
+  <div class="col-12 mb-3">
+    <div class="col-12">
+      <h3 class="text-muted fs-4">Filter Articles</h3>
+    </div>
+    <form class="row" #filterForm="ngForm" (ngSubmit)="onSubmit(filterForm)">
+      <div class="mb-3 col-4">
+        <label for="qInTitle" class="form-label">Title</label>
+        <input
+          type="text"
+          class="form-control"
+          id="qInTitle"
+          name="qInTitle"
+          [(ngModel)]="filterData.qInTitle"
+        />
+      </div>
+      <div class="mb-3 col-4">
+        <label for="pageSize" class="form-label">Page Size</label>
+        <input
+          type="number"
+          class="form-control"
+          id="pageSize"
+          name="pageSize"
+          max="50"
+          [(ngModel)]="filterData.pageSize"
+        />
+      </div>
+      <div class="mb-3 col-4">
+        <label for="page" class="form-label">Page</label>
+        <input
+          type="number"
+          class="form-control"
+          id="page"
+          name="page"
+          [(ngModel)]="filterData.page"
+        />
+      </div>
+      <div class="mb-3 col-4">
+        <label for="from" class="form-label">from</label>
+        <input
+          type="date"
+          class="form-control"
+          id="from"
+          name="from"
+          [(ngModel)]="filterData.from"
+        />
+      </div>
+      <div class="mb-3 col-4">
+        <label for="to" class="form-label">To</label>
+        <input
+          type="date"
+          class="form-control"
+          id="to"
+          name="to"
+          [(ngModel)]="filterData.to"
+        />
+      </div>
+      <div class="mb-3 col-4">
+        <label for="sortBy" class="form-label">Sort By</label>
+        <select
+          class="form-select"
+          name="sortBy"
+          [(ngModel)]="filterData.sortBy"
+        >
+          <option value="relevancy">Relevancy</option>
+          <option value="popularity">Popularity</option>
+          <option value="publishedAt">PublishedAt</option>
+        </select>
+      </div>
+
+      <div class="col-12">
+        <button type="submit" class="btn btn-primary">Search</button>
+      </div>
+    </form>
+    {{ filterData | json }}
+  </div>
   <div class="col-12">
-    <h3 class="text-muted">Articles</h3>
+    <h2 class="text-muted fs-2">Articles</h2>
   </div>
   <div class="row">
     <app-article-card
