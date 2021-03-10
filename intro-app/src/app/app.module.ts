@@ -1,64 +1,35 @@
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
+import { ArticleModule } from './articles/article.module';
+import { AuthModule } from './auth/auth.module';
+import { ProductModule } from './products/product.module';
+
 import { AppComponent } from './app.component';
-import { AccountComponent } from './account/account.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { ProductListComponent } from './product/product-list.component';
-import { ConvertToSpace } from './shared/pipes/convertToSpace.pipe';
-import { RatingComponent } from './rating/rating.component';
+
 import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './pagenotfound/pagenotfound.component';
 import { NavigationComponent } from './navigation/navigation.component';
-import { ArticlesComponent } from './articles/articles.component';
-import { ArticleCardComponent } from './articles/article-card/article-card.component';
-import { ArticleDetailComponent } from './articles/article-detail/article-detail.component';
-import { AuthGuard } from './auth.guard';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    AccountComponent,
-    DashboardComponent,
-    ProductListComponent,
-    RatingComponent,
     PageNotFoundComponent,
-    ConvertToSpace,
     NavigationComponent,
-    ArticlesComponent,
-    ArticleCardComponent,
-    ArticleDetailComponent,
   ],
   imports: [
     BrowserModule,
-    FormsModule,
     HttpClientModule,
+    ArticleModule,
+    AuthModule,
+    ProductModule,
     RouterModule.forRoot([
-      {
-        path: 'products',
-        component: ProductListComponent,
-      },
-      {
-        path: 'dashboard',
-        component: DashboardComponent,
-        canActivate: [AuthGuard],
-      },
-      {
-        path: 'account',
-        component: AccountComponent,
-        canActivate: [AuthGuard],
-      },
       {
         path: 'home',
         component: HomeComponent,
-      },
-      {
-        path: 'articles/:title',
-        component: ArticleDetailComponent,
       },
       {
         path: '',
