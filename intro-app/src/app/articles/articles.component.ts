@@ -24,8 +24,9 @@ export class ArticlesComponent implements OnInit {
   }
 
   private loadArticles() {
-    // @ts-ignore
-    const query: string = new URLSearchParams(this.filterData).toString();
+    const query: string = new URLSearchParams(
+      this.filterData as any
+    ).toString();
     this._articleService
       .getArticles(query)
       .subscribe((response: IArticleResponse) => {
