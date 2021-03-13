@@ -6,6 +6,9 @@ import { FormsModule } from '@angular/forms';
 import { ArticlesComponent } from './articles.component';
 import { ArticleCardComponent } from './article-card/article-card.component';
 import { ArticleDetailComponent } from './article-detail/article-detail.component';
+import { ArticleResolverService } from './article-resolver.service';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ArticleHeaderInterceptor } from './add-header.interceptor.service';
 
 @NgModule({
   declarations: [
@@ -20,12 +23,22 @@ import { ArticleDetailComponent } from './article-detail/article-detail.componen
       {
         path: 'articles',
         component: ArticlesComponent,
+        resolve: {
+          articlesResponse: ArticleResolverService,
+        },
       },
       {
         path: 'articles/:title',
         component: ArticleDetailComponent,
       },
     ]),
+  ],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ArticleHeaderInterceptor,
+      multi: true,
+    },
   ],
   exports: [ArticlesComponent],
 })
