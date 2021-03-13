@@ -1,7 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
-import { IArticle, IArticleResponse } from './article';
+import { IArticle, IArticleResponse, IArticleResponseError } from './article';
 import { ArticleService } from './article.service';
 import { FilterForm } from '../data/filter-form-shape.interface';
 
@@ -17,23 +18,30 @@ export class ArticlesComponent implements OnInit {
     pageSize: 20,
     qInTitle: 'google',
   };
-  constructor(private _articleService: ArticleService) {}
+  constructor(
+    private _articleService: ArticleService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
-    this.loadArticles();
+    // this.loadArticles();
+    const result: IArticleResponse = this.route.snapshot.data[
+      'articlesResponse'
+    ];
+
+    this.articles = result.articles;
   }
 
   private loadArticles() {
     const query: string = new URLSearchParams(
       this.filterData as any
     ).toString();
-    this._articleService
-      .getArticles(query)
-      .subscribe((response: IArticleResponse) => {
-        if ((response.status = 'ok')) {
-          this.articles = response.articles;
-        }
-      });
+    this._articleService.getArticlesCustom(query).subscribe(
+      (response: IArticle[]) => {
+        this.articles = response;
+      },
+      (err: IArticleResponseError) => {}
+    );
   }
 
   onSubmit(form: NgForm) {

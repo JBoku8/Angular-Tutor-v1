@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 import { ArticleModule } from './articles/article.module';
@@ -12,6 +12,8 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './pagenotfound/pagenotfound.component';
 import { NavigationComponent } from './navigation/navigation.component';
+import { ArticleResolverService } from './articles/article-resolver.service';
+import { ArticleHeaderInterceptor } from './articles/add-header.interceptor.service';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,9 @@ import { NavigationComponent } from './navigation/navigation.component';
       {
         path: 'home',
         component: HomeComponent,
+        resolve: {
+          articlesResponse: ArticleResolverService,
+        },
       },
       {
         path: '',
