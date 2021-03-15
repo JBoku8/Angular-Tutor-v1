@@ -3,3 +3,7 @@ export interface SignInData {
   password: string;
   remember?: boolean;
 }
+
+export interface SignInResponse {
+  token: string;
+}

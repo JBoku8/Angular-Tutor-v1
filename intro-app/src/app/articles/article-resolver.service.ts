@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-// import { catchError, of } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import {
   Resolve,
   ActivatedRouteSnapshot,
@@ -28,7 +28,8 @@ export class ArticleResolverService
       qInTitle: 'google',
     };
     const query: string = new URLSearchParams(filterData as any).toString();
-    return this._articleService.getArticles(query);
-    //   .pipe(catchError((err) => of(err)));
+    return this._articleService
+      .getArticles(query)
+      .pipe(catchError((err) => of(err)));
   }
 }
