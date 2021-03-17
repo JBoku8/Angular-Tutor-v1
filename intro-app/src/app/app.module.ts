@@ -6,7 +6,6 @@ import { RouterModule } from '@angular/router';
 import { ArticleModule } from './articles/article.module';
 import { AuthModule } from './auth/auth.module';
 import { ProductModule } from './products/product.module';
-import { CoreModule } from './core/core.module';
 
 import { AppComponent } from './app.component';
 
@@ -16,7 +15,7 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { ArticleResolverService } from './articles/article-resolver.service';
 import { LogResponseInterceptor } from './core/log-response.interceptor';
 import { CacheInterceptor } from './core/cache.interceptor';
-import { AddAuthTokenInterceptor } from './core/add-auth-token.iterceptor';
+import { AddAuthTokenInterceptor } from './core/add-auth-token.interceptor';
 
 @NgModule({
   declarations: [

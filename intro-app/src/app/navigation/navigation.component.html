@@ -12,13 +12,23 @@
     >
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div
+      class="collapse navbar-collapse justify-content-between"
+      id="navbarNavAltMarkup"
+    >
       <div class="navbar-nav">
         <a class="nav-link" [routerLink]="['/home']">Home</a>
         <a class="nav-link" [routerLink]="['/products']">Products</a>
         <a class="nav-link" [routerLink]="['/articles']">Articles</a>
+      </div>
+      <div class="navbar-nav">
         <a class="nav-link" [routerLink]="['/auth/dashboard']">Dashboard</a>
         <a class="nav-link" [routerLink]="['/auth/account']">Account</a>
+        <a class="nav-link" [routerLink]="['/auth/sign-in']">Sign In</a>
+        <a class="nav-link" [routerLink]="['/auth/sign-up']">Sign Up</a>
+        <button class="btn btn-primary" (click)="onLogOut($event)">
+          Log Out
+        </button>
       </div>
     </div>
   </div>

@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-12 my-4">
     <h2 class="text-center text-muted">Sign In</h2>
-    {{ signInData | json }}
+    <!-- {{ signInData | json }} -->
     <hr class="divider" />
   </div>
   <div class="col-6 mx-auto">
@@ -36,6 +36,9 @@
         />
         <label class="form-check-label" for="remember">Check me out</label>
       </div>
+      <p>
+        <a class="btn btn-link" [routerLink]="['/auth/sign-up']">Sign Up</a>
+      </p>
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
   </div>
