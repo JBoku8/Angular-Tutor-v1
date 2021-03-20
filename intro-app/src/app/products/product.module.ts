@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ProductListComponent } from './product/product-list.component';
 import { ConvertToSpace } from '../shared/pipes/convertToSpace.pipe';
-import { RatingComponent } from '../rating/rating.component';
+import { RatingComponent } from '../shared/rating/rating.component';
 
 @NgModule({
   declarations: [ConvertToSpace, ProductListComponent, RatingComponent],
