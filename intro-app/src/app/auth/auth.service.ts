@@ -10,6 +10,7 @@ import {
   AUTH_BASE_API_URL,
   TOKEN_EXP_KEY,
   TOKEN_TTL,
+  REFRESH_TOKEN_KEY,
 } from '../shared/constants';
 import { SignInData, SignInResponse } from '../data/sign-in-form.interface';
 import { SignUpData, SignUpResponse } from '../data/sign-up-form.interface';
@@ -29,6 +30,7 @@ export class AuthService {
       .pipe(
         tap((result) => {
           this.storageService.set(TOKEN_KEY, result.token);
+          this.storageService.set(REFRESH_TOKEN_KEY, 'REFRESH_TOKEN');
           this.setTokenLifeTime();
         }),
         map((result) => {
@@ -71,8 +73,25 @@ export class AuthService {
     return currentTime > tokenTime.getTime();
   }
 
+  getRefreshToken(): string | undefined {
+    return this.storageService.get(REFRESH_TOKEN_KEY);
+  }
+
+  refreshToken(token: string): boolean {
+    if (token === 'REFRESH_TOKEN') {
+      this.storageService.set(TOKEN_KEY, 'QpwL5tke4Pnpja7X4');
+      this.storageService.set(REFRESH_TOKEN_KEY, 'REFRESH_TOKEN');
+      this.setTokenLifeTime();
+
+      return true;
+    }
+    return false;
+  }
+
   logOut(): void {
     this.storageService.remove(TOKEN_KEY);
+    this.storageService.remove(REFRESH_TOKEN_KEY);
+    this.storageService.remove(TOKEN_EXP_KEY);
   }
   isAuthorized(): boolean {
     return this.storageService.exists(TOKEN_KEY);
