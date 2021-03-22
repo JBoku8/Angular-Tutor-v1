@@ -4,6 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { tap, catchError, map } from 'rxjs/operators';
 
 import { IArticleResponse, IArticle, IArticleResponseError } from './article';
+import { FilterForm } from '../data/filter-form-shape.interface';
 
 import { BASE_API_URL } from '../../config';
 
@@ -11,6 +12,11 @@ import { BASE_API_URL } from '../../config';
   providedIn: 'root',
 })
 export class ArticleService {
+  public filterData: FilterForm = {
+    page: 1,
+    pageSize: 20,
+    qInTitle: 'google',
+  };
   private baseUrl: string = BASE_API_URL;
 
   constructor(private http: HttpClient) {}

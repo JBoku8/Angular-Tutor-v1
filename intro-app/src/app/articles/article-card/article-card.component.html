@@ -15,7 +15,10 @@
     <a [href]="article?.url" class="card-link" target="_blank" rel="noopener"
       >Original Post</a
     >
-    <a [routerLink]="['/articles', article?.title]" class="card-link"
+    <a
+      [routerLink]="['/articles', article?.title]"
+      class="card-link"
+      queryParamsHandling="preserve"
       >Read More</a
     >
   </div>

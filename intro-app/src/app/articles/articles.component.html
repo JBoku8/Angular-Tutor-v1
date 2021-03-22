@@ -3,7 +3,12 @@
     <div class="col-12">
       <h3 class="text-muted fs-4">Filter Articles</h3>
     </div>
-    <form class="row" #filterForm="ngForm" (ngSubmit)="onSubmit(filterForm)">
+    <form
+      class="row"
+      #filterForm="ngForm"
+      (ngSubmit)="onSubmit(filterForm)"
+      *ngIf="filterData"
+    >
       <div class="mb-3 col-4">
         <label for="qInTitle" class="form-label">Title</label>
         <input

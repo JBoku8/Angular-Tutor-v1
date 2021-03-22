@@ -9,6 +9,7 @@ import { ArticleDetailComponent } from './article-detail/article-detail.componen
 import { ArticleResolverService } from './article-resolver.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ArticleHeaderInterceptor } from './add-header.interceptor.service';
+import { AuthGuard } from '../auth.guard';
 
 @NgModule({
   declarations: [
@@ -26,10 +27,12 @@ import { ArticleHeaderInterceptor } from './add-header.interceptor.service';
         resolve: {
           articlesResponse: ArticleResolverService,
         },
+        canActivate: [AuthGuard],
       },
       {
         path: 'articles/:title',
         component: ArticleDetailComponent,
+        canActivate: [AuthGuard],
       },
     ]),
   ],

@@ -19,6 +19,7 @@ import { SignUpData, SignUpResponse } from '../data/sign-up-form.interface';
   providedIn: 'root',
 })
 export class AuthService {
+  redirectUrl: string = '';
   constructor(
     private storageService: LocalStorageService,
     private http: HttpClient
