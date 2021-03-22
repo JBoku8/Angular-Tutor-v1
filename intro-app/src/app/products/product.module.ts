@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { ProductListComponent } from './product/product-list.component';
 import { ConvertToSpace } from '../shared/pipes/convertToSpace.pipe';
 import { RatingComponent } from '../shared/rating/rating.component';
+import { AuthGuard } from '../auth.guard';
 
 @NgModule({
   declarations: [ConvertToSpace, ProductListComponent, RatingComponent],
@@ -15,6 +16,7 @@ import { RatingComponent } from '../shared/rating/rating.component';
       {
         path: 'products',
         component: ProductListComponent,
+        canActivate: [AuthGuard],
       },
     ]),
   ],
