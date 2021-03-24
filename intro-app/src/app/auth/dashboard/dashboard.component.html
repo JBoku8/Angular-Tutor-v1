@@ -1,5 +1,15 @@
 <h2 class="title">Dashboard Component</h2>
 <h4>{{ title }}</h4>
 <p>
-  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum, excepturi temporibus rerum saepe corrupti, cum sapiente, magnam architecto sed similique at voluptates sequi mollitia quo. Error minima aspernatur dolor laudantium?
+  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum, excepturi
+  temporibus rerum saepe corrupti, cum sapiente, magnam architecto sed similique
+  at voluptates sequi mollitia quo. Error minima aspernatur dolor laudantium?
 </p>
+
+<button class="btn btn-primary" (click)="onAddItem()">Add Item</button>
+
+<ul *ngIf="list.length">
+  <li *ngFor="let item of list" (click)="onRemove(item.id)">
+    {{ item | json }}
+  </li>
+</ul>

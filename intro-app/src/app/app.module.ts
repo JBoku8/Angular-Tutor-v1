@@ -2,6 +2,9 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 
 import { ArticleModule } from './articles/article.module';
 import { AuthModule } from './auth/auth.module';
@@ -18,12 +21,17 @@ import { LogResponseInterceptor } from './core/log-response.interceptor';
 import { CacheInterceptor } from './core/cache.interceptor';
 import { AddAuthTokenInterceptor } from './core/add-auth-token.interceptor';
 
+import { firebaseConfig } from '../firebaseConfig';
+
 // tree shaking
 @NgModule({
   declarations: [AppComponent, HomeComponent, PageNotFoundComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireAuthModule,
+    AngularFirestoreModule,
     CoreModule,
     ArticleModule,
     AuthModule,

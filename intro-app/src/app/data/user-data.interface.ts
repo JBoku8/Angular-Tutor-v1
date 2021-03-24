@@ -1,8 +1,8 @@
 import { UserRole } from './user-roles.interface';
 export interface User {
-  firstName: string;
-  lastName: string;
+  uid: string;
   email: string;
-  avatar: string;
-  role: UserRole;
+  displayName: string;
+  emailVerified: boolean;
+  photoURL: string;
 }

@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { from, Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 import { LocalStorageService } from '../core/local-storage.service';
 
@@ -12,6 +14,7 @@ import {
   TOKEN_TTL,
   REFRESH_TOKEN_KEY,
 } from '../shared/constants';
+
 import { SignInData, SignInResponse } from '../data/sign-in-form.interface';
 import { SignUpData, SignUpResponse } from '../data/sign-up-form.interface';
 
@@ -20,9 +23,12 @@ import { SignUpData, SignUpResponse } from '../data/sign-up-form.interface';
 })
 export class AuthService {
   redirectUrl: string = '';
+
   constructor(
     private storageService: LocalStorageService,
-    private http: HttpClient
+    private http: HttpClient,
+    public afs: AngularFirestore,
+    public afAuth: AngularFireAuth
   ) {}
 
   signIn(data: SignInData): Observable<boolean> {
@@ -42,6 +48,17 @@ export class AuthService {
           }
         })
       );
+  }
+
+  async firebaseSignIn(data: SignInData) {
+    return this.afAuth.signInWithEmailAndPassword(data.email, data.password);
+  }
+
+  async firebaseSignUp(data: SignUpData) {
+    return this.afAuth.createUserWithEmailAndPassword(
+      data.email,
+      data.password
+    );
   }
 
   signUp(data: SignUpData): Observable<boolean> {
