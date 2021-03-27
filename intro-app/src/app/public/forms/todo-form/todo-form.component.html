@@ -1,0 +1,67 @@
+<div class="row" *ngIf="!isEditing && todo">
+  <div class="col-12 my-4">
+    <h2 class="text-center text-muted">add new todo</h2>
+    <!-- {{ signInData | json }} -->
+    <hr class="divider" />
+  </div>
+  <div class="col-6 mx-auto">
+    <form #todoForm="ngForm" (ngSubmit)="onSubmit(todoForm)">
+      <div class="mb-3">
+        <label for="email" class="form-label">todo title</label>
+        <input
+          type="text"
+          class="form-control"
+          id="title"
+          name="title"
+          [(ngModel)]="todo.title"
+        />
+      </div>
+      <div class="mb-3 form-check">
+        <input
+          type="checkbox"
+          class="form-check-input"
+          id="completed"
+          name="completed"
+          [(ngModel)]="todo.completed"
+        />
+        <label class="form-check-label" for="completed">Completed</label>
+      </div>
+
+      <button type="submit" class="btn btn-primary">save todo</button>
+    </form>
+  </div>
+</div>
+
+<div class="row" *ngIf="isEditing && todo">
+  <div class="col-12 my-4">
+    <h2 class="text-center text-muted">update todo</h2>
+    <!-- {{ signInData | json }} -->
+    <hr class="divider" />
+  </div>
+  <div class="col-6 mx-auto">
+    <form #updateForm="ngForm" (ngSubmit)="onUpdate(updateForm)">
+      <div class="mb-3">
+        <label for="email" class="form-label">todo title</label>
+        <input
+          type="text"
+          class="form-control"
+          id="title"
+          name="title"
+          [(ngModel)]="todo.title"
+        />
+      </div>
+      <div class="mb-3 form-check">
+        <input
+          type="checkbox"
+          class="form-check-input"
+          id="completed"
+          name="completed"
+          [(ngModel)]="todo.completed"
+        />
+        <label class="form-check-label" for="completed">Completed</label>
+      </div>
+
+      <button type="submit" class="btn btn-primary">update todo</button>
+    </form>
+  </div>
+</div>

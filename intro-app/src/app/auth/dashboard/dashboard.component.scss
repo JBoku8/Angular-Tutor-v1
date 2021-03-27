@@ -10,9 +10,12 @@ h2 {
   color: $myred;
 }
 
-
 p {
   color: $myred;
   border: $borderWidth solid $myred;
   padding: $basePadding;
+}
+
+.list-group-item {
+  cursor: pointer;
 }

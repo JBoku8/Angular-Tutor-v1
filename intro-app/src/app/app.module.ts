@@ -8,7 +8,8 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 
 import { ArticleModule } from './articles/article.module';
 import { AuthModule } from './auth/auth.module';
-import { ProductModule } from './products/product.module';
+import { PublicModule } from './public/public.module';
+// import { ProductModule } from './products/product.module';
 import { CoreModule } from './core/core.module';
 
 import { AppComponent } from './app.component';
@@ -32,11 +33,16 @@ import { firebaseConfig } from '../firebaseConfig';
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule,
     AngularFirestoreModule,
+    PublicModule,
     CoreModule,
     ArticleModule,
     AuthModule,
-    ProductModule,
     RouterModule.forRoot([
+      {
+        path: 'products',
+        loadChildren: () =>
+          import('./products/product.module').then((m) => m.ProductModule),
+      },
       {
         path: 'home',
         component: HomeComponent,
