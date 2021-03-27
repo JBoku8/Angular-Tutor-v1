@@ -22,16 +22,16 @@ import { AuthGuard } from '../auth.guard';
     FormsModule,
     RouterModule.forChild([
       {
+        path: 'articles/:title',
+        component: ArticleDetailComponent,
+        canActivate: [AuthGuard],
+      },
+      {
         path: 'articles',
         component: ArticlesComponent,
         resolve: {
           articlesResponse: ArticleResolverService,
         },
-        canActivate: [AuthGuard],
-      },
-      {
-        path: 'articles/:title',
-        component: ArticleDetailComponent,
         canActivate: [AuthGuard],
       },
     ]),

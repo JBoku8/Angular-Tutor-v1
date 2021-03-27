@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { AuthService } from '../../auth/auth.service';
+import { AuthService } from '../../auth/shared/auth.service';
 
 import { EXP_TIME } from '../../shared/constants';
 @Component({

@@ -1,15 +1,49 @@
-<h2 class="title">Dashboard Component</h2>
-<h4>{{ title }}</h4>
-<p>
-  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum, excepturi
-  temporibus rerum saepe corrupti, cum sapiente, magnam architecto sed similique
-  at voluptates sequi mollitia quo. Error minima aspernatur dolor laudantium?
-</p>
+<div class="row mb-3">
+  <div class="col-6">
+    <h2 class="title">Dashboard Component</h2>
+    <h4>{{ title }}</h4>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum, excepturi
+      temporibus rerum saepe corrupti, cum sapiente, magnam architecto sed
+      similique at voluptates sequi mollitia quo. Error minima aspernatur dolor
+      laudantium?
+    </p>
+  </div>
+  <div class="col-6">
+    <app-todo-form
+      [todo]="newTodo"
+      (onFormSubmit)="onSubmit($event)"
+      [isEditing]="isEditing"
+    ></app-todo-form>
+  </div>
+</div>
 
-<button class="btn btn-primary" (click)="onAddItem()">Add Item</button>
+<!-- <button class="btn btn-primary" (click)="onAddItem()">Add Item</button> -->
 
-<ul *ngIf="list.length">
-  <li *ngFor="let item of list" (click)="onRemove(item.id)">
-    {{ item | json }}
-  </li>
-</ul>
+<div class="row">
+  <div class="col-6">
+    <ul *ngIf="list.length" class="list-group">
+      <li
+        *ngFor="let item of list"
+        class="d-flex justify-content-between"
+        [ngClass]="getClasses(item)"
+      >
+        {{ item.title }}
+
+        <div>
+          <button class="btn btn-warning" (click)="onTodoUpdate(item)">
+            <i class="fas fa-pencil-alt"></i>
+          </button>
+
+          <button
+            class="btn btn-danger"
+            (click)="onRemove(item.id)"
+            style="margin-left: 5px"
+          >
+            <i class="fas fa-trash fa-1x"></i>
+          </button>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>

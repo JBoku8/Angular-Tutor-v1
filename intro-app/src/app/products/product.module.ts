@@ -14,7 +14,7 @@ import { AuthGuard } from '../auth.guard';
     FormsModule,
     RouterModule.forChild([
       {
-        path: 'products',
+        path: '',
         component: ProductListComponent,
         canActivate: [AuthGuard],
       },

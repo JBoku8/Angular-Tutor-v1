@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Todo } from '../auth/shared/todo';
 
 @Injectable({
   providedIn: 'root',
@@ -8,9 +10,9 @@ import { map } from 'rxjs/operators';
 export class FireStoreService {
   constructor(private fireStore: AngularFirestore) {}
 
-  getCollection(collectionName: string) {
+  getCollection(collectionName: string): Observable<Todo[]> {
     return this.fireStore
-      .collection(collectionName)
+      .collection<Todo[]>(collectionName, (ref) => ref.limit(10))
       .snapshotChanges()
       .pipe(
         map((items) => {
@@ -32,6 +34,9 @@ export class FireStoreService {
     return this.fireStore.collection(collectionName).add(data);
   }
 
+  updateItem(collectionName: string, docId: string, data: any) {
+    return this.fireStore.collection(collectionName).doc(docId).update(data);
+  }
   async removeItemById(collectionName: string, id: string) {
     return this.fireStore.collection(collectionName).doc(id).delete();
   }
