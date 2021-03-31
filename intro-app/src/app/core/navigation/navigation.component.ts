@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { FirebaseAuthService } from 'src/app/auth/shared/firebase-auth.service';
 
 import { AuthService } from '../../auth/shared/auth.service';
 
@@ -10,7 +11,10 @@ import { EXP_TIME } from '../../shared/constants';
   styleUrls: ['./navigation.component.scss'],
 })
 export class NavigationComponent implements OnInit {
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    public fireAuthService: FirebaseAuthService
+  ) {}
 
   ngOnInit(): void {
     if (this.authService.isAuthorized()) {
@@ -34,8 +38,7 @@ export class NavigationComponent implements OnInit {
   }
 
   private notAuthorizedAction(): void {
-    this.authService.logOut();
-    this.router.navigate(['home']);
+    this.fireAuthService.signOut();
   }
 
   onLogOut(event: Event) {

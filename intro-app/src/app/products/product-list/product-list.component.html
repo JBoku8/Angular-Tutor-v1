@@ -1,5 +1,10 @@
-<h3 class="text-muted">Product List</h3>
+<div class="row mb-4">
+  <div class="col-4">
+    <h3 class="text-muted">Product List</h3>
 
+    <a class="btn btn-info" [routerLink]="['add']">Add new product</a>
+  </div>
+</div>
 <div class="row px-3">
   <button class="btn btn-warning col-2" (click)="toggleImages()">
     {{ showImages ? "Hide" : "Show" }} Images
@@ -32,7 +37,11 @@
           *ngIf="showImages"
         />
       </td>
-      <td>{{ item.productName | lowercase }}</td>
+      <td>
+        <a [routerLink]="['edit/', item.productCode]">
+          {{ item.productName | lowercase }}
+        </a>
+      </td>
       <td>{{ item.productCode | uppercase | convertToSpace: "-" }}</td>
       <td>{{ item.price | currency: "USD":"symbol":"1.2-2" }}</td>
       <td>

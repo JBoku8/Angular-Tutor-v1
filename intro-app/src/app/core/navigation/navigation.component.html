@@ -17,18 +17,58 @@
       id="navbarNavAltMarkup"
     >
       <div class="navbar-nav">
-        <a class="nav-link" [routerLink]="['/home']">Home</a>
-        <a class="nav-link" [routerLink]="['/products']">Products</a>
-        <a class="nav-link" [routerLink]="['/articles']">Articles</a>
+        <a class="nav-link" [routerLink]="['/home']" routerLinkActive="active"
+          >Home</a
+        >
+        <a
+          class="nav-link"
+          [routerLink]="['/products']"
+          routerLinkActive="active"
+          >Products</a
+        >
+        <a
+          class="nav-link"
+          [routerLink]="['/articles']"
+          routerLinkActive="active"
+          >Articles</a
+        >
       </div>
-      <div class="navbar-nav">
-        <a class="nav-link" [routerLink]="['/auth/dashboard']">Dashboard</a>
-        <a class="nav-link" [routerLink]="['/auth/account']">Account</a>
-        <a class="nav-link" [routerLink]="['/auth/sign-in']">Sign In</a>
-        <a class="nav-link" [routerLink]="['/auth/sign-up']">Sign Up</a>
+      <div
+        class="navbar-nav"
+        *ngIf="(fireAuthService.currentUser$ | async)?.uid"
+      >
+        <a
+          class="nav-link"
+          [routerLink]="['/auth/dashboard']"
+          routerLinkActive="active"
+          >Dashboard</a
+        >
+        <a
+          class="nav-link"
+          [routerLink]="['/auth/account']"
+          routerLinkActive="active"
+          >Account</a
+        >
         <button class="btn btn-primary" (click)="onLogOut($event)">
           Log Out
         </button>
+      </div>
+      <div
+        class="navbar-nav"
+        *ngIf="!(fireAuthService.currentUser$ | async)?.uid"
+      >
+        <a
+          class="nav-link"
+          [routerLink]="['/auth/sign-in']"
+          routerLinkActive="active"
+          >Sign In</a
+        >
+        <a
+          class="nav-link"
+          [routerLink]="['/auth/sign-up']"
+          routerLinkActive="active"
+          >Sign Up</a
+        >
       </div>
     </div>
   </div>
