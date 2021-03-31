@@ -39,7 +39,13 @@
       <p>
         <a class="btn btn-link" [routerLink]="['/auth/sign-up']">Sign Up</a>
       </p>
-      <button type="submit" class="btn btn-primary">Submit</button>
+      <p>
+        <button class="btn btn-info" (click)="signInWithGoogle()" type="button">
+          Sign In
+          <i class="fab fa-google"></i>
+        </button>
+      </p>
+      <button type="submit" class="btn btn-primary">Sign In</button>
     </form>
   </div>
 </div>

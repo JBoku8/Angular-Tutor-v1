@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { IProduct, ITodo } from './product';
-import { ProductService } from './product.service';
+import { IProduct, ITodo } from '../shared/product';
+import { ProductService } from '../shared/product.service';
 
 @Component({
   selector: 'app-product-list',

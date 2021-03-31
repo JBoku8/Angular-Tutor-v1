@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { from, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
-import { AngularFirestore } from '@angular/fire/firestore';
-import { AngularFireAuth } from '@angular/fire/auth';
 
 import { LocalStorageService } from '../../core/local-storage.service';
 
@@ -26,9 +24,7 @@ export class AuthService {
 
   constructor(
     private storageService: LocalStorageService,
-    private http: HttpClient,
-    public afs: AngularFirestore,
-    public afAuth: AngularFireAuth
+    private http: HttpClient
   ) {}
 
   signIn(data: SignInData): Observable<boolean> {
@@ -48,17 +44,6 @@ export class AuthService {
           }
         })
       );
-  }
-
-  async firebaseSignIn(data: SignInData) {
-    return this.afAuth.signInWithEmailAndPassword(data.email, data.password);
-  }
-
-  async firebaseSignUp(data: SignUpData) {
-    return this.afAuth.createUserWithEmailAndPassword(
-      data.email,
-      data.password
-    );
   }
 
   signUp(data: SignUpData): Observable<boolean> {
