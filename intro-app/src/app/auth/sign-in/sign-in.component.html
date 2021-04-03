@@ -1,29 +1,82 @@
 <div class="row">
   <div class="col-12 my-4">
     <h2 class="text-center text-muted">Sign In</h2>
-    <!-- {{ signInData | json }} -->
+    signInForm.controls.email?.value - {{ signInForm.controls.email?.value }}
+    <br />
+    signInForm.controls.email?.valid - {{ signInForm.controls.email?.valid }}
+    <br />
+
+    signInForm.controls.email?.dirty - {{ signInForm.controls.email?.dirty }}
+    <br />
+    signInForm.controls.email?.pristine -
+    {{ signInForm.controls.email?.pristine }}
+    <br />
+
+    signInForm.controls.email?.touched -
+    {{ signInForm.controls.email?.touched }}
+    <br />
+
+    signInForm.controls.email?.untouched -
+    {{ signInForm.controls.email?.untouched }}
+
     <hr class="divider" />
   </div>
   <div class="col-6 mx-auto">
-    <form #signInForm="ngForm" (ngSubmit)="onSubmit(signInForm)">
+    <form
+      #signInForm="ngForm"
+      (ngSubmit)="onSubmit(signInForm.value)"
+      autocomplete="off"
+      novalidate
+    >
+      <div class="alert alert-danger" *ngIf="fireAuthService.hasError">
+        <p class="m-0">{{ fireAuthService.hasError }}</p>
+      </div>
       <div class="mb-3">
         <label for="email" class="form-label">Email address</label>
+        <em
+          class="required"
+          *ngIf="
+            signInForm.controls.email?.invalid &&
+            (signInForm.controls.email?.touched || mouseOverSignInButton)
+          "
+          >Required</em
+        >
         <input
           type="email"
-          class="form-control"
+          class="form-control is-invalid"
+          [ngClass]="{
+            'is-invalid':
+              signInForm.controls.email?.invalid &&
+              (signInForm.controls.email?.touched || mouseOverSignInButton)
+          }"
           id="email"
           name="email"
           [(ngModel)]="signInData.email"
+          required
         />
       </div>
       <div class="mb-3">
         <label for="password" class="form-label">Password</label>
+        <em
+          class="required"
+          *ngIf="
+            signInForm.controls.password?.invalid &&
+            (signInForm.controls.password?.touched || mouseOverSignInButton)
+          "
+          >Required</em
+        >
         <input
           type="password"
           class="form-control"
+          [ngClass]="{
+            'is-invalid':
+              signInForm.controls.password?.invalid &&
+              (signInForm.controls.password?.touched || mouseOverSignInButton)
+          }"
           id="password"
           name="password"
           [(ngModel)]="signInData.password"
+          required
         />
       </div>
       <div class="mb-3 form-check">
@@ -37,15 +90,25 @@
         <label class="form-check-label" for="remember">Check me out</label>
       </div>
       <p>
-        <a class="btn btn-link" [routerLink]="['/auth/sign-up']">Sign Up</a>
-      </p>
-      <p>
         <button class="btn btn-info" (click)="signInWithGoogle()" type="button">
           Sign In
           <i class="fab fa-google"></i>
         </button>
+        OR <a class="btn btn-link" [routerLink]="['/auth/sign-up']">Sign Up</a>
       </p>
-      <button type="submit" class="btn btn-primary">Sign In</button>
+
+      <span
+        (mouseenter)="toggleMouserOver(true)"
+        (mouseleave)="toggleMouserOver(false)"
+      >
+        <button
+          type="submit"
+          class="btn btn-primary btn-lg"
+          [disabled]="signInForm.invalid"
+        >
+          Sign In
+        </button>
+      </span>
     </form>
   </div>
 </div>

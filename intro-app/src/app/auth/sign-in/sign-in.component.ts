@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormControl, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LocalStorageService } from 'src/app/core/local-storage.service';
 import { SignInData } from 'src/app/data/sign-in-form.interface';
@@ -14,19 +14,28 @@ import { FirebaseAuthService } from '../shared/firebase-auth.service';
 })
 export class SignInComponent implements OnInit {
   signInData: SignInData = {
-    email: 'eve.holt@reqres.in',
-    password: 'cityslicka',
+    email: '',
+    password: '',
     remember: false,
   };
-  constructor(private fireAuthService: FirebaseAuthService) {}
+
+  mouseOverSignInButton: boolean = false;
+
+  constructor(public fireAuthService: FirebaseAuthService) {}
 
   ngOnInit(): void {}
 
-  async onSubmit(signInForm: NgForm) {
-    this.fireAuthService.signIn(this.signInData);
+  onSubmit(signInForm: SignInData) {
+    this.fireAuthService.hasError = null;
+    this.fireAuthService.signIn(signInForm);
   }
 
   signInWithGoogle() {
+    this.fireAuthService.hasError = null;
     this.fireAuthService.googleSignIn();
+  }
+
+  toggleMouserOver(value: boolean) {
+    this.mouseOverSignInButton = value;
   }
 }

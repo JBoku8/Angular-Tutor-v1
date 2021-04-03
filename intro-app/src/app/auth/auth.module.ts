@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AccountComponent } from './account/account.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AuthGuard } from '../auth.guard';
@@ -19,6 +19,7 @@ import { PublicModule } from '../public/public.module';
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     PublicModule,
     RouterModule.forChild([
       {

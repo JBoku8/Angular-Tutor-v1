@@ -11,9 +11,11 @@ import { SignUpData } from 'src/app/data/sign-up-form.interface';
 })
 export class FirebaseAuthService {
   currentUser$ = new Observable<firebase.User | null>();
+  hasError: string | null;
 
   constructor(private router: Router, private afAuth: AngularFireAuth) {
     this.currentUser$ = this.afAuth.authState;
+    this.hasError = null;
   }
 
   googleSignIn() {
@@ -29,12 +31,13 @@ export class FirebaseAuthService {
 
   signIn(data: SignInData) {
     this.afAuth
-      .createUserWithEmailAndPassword(data.email, data.password)
+      .signInWithEmailAndPassword(data.email, data.password)
       .then(() => {
         this.router.navigate(['/home']);
       })
       .catch((error) => {
         console.log('[FirebaseAuthService@signIn]', error);
+        this.hasError = error.message;
       });
   }
 
@@ -46,6 +49,7 @@ export class FirebaseAuthService {
       })
       .catch((error) => {
         console.log('[FirebaseAuthService@signUp]', error);
+        this.hasError = error.message;
       });
   }
 

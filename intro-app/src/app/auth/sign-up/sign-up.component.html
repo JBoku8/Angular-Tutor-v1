@@ -5,31 +5,50 @@
     <hr class="divider" />
   </div>
   <div class="col-6 mx-auto">
-    <form #signUpForm="ngForm" (ngSubmit)="onSubmit(signUpForm)">
+    <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()" autocomplete="off">
+      <div class="alert alert-danger" *ngIf="fireAuthService.hasError">
+        <p class="m-0">{{ fireAuthService.hasError }}</p>
+      </div>
       <div class="mb-3">
         <label for="email" class="form-label">Email address</label>
+        <em class="required" *ngIf="validateEmail()">Required</em>
         <input
           type="email"
           class="form-control"
+          [ngClass]="{ 'is-invalid': validateEmail() }"
           id="email"
           name="email"
-          [(ngModel)]="signUpData.email"
+          formControlName="email"
         />
       </div>
+
       <div class="mb-3">
         <label for="password" class="form-label">Password</label>
+        <em class="required" *ngIf="validatePassword()">Required</em>
         <input
           type="password"
           class="form-control"
+          [ngClass]="{ 'is-invalid': validatePassword() }"
           id="password"
           name="password"
-          [(ngModel)]="signUpData.password"
+          formControlName="password"
         />
       </div>
       <p>
         <a class="btn btn-link" [routerLink]="['/auth/sign-up']">Sign In</a>
       </p>
-      <button type="submit" class="btn btn-primary">Sign Up</button>
+      <span
+        (mouseenter)="mouseOverSignUpButton = true"
+        (mouseleave)="mouseOverSignUpButton = false"
+      >
+        <button
+          type="submit"
+          class="btn btn-primary btn-lg"
+          [disabled]="signUpForm.invalid"
+        >
+          Sign Up
+        </button>
+      </span>
     </form>
   </div>
 </div>
