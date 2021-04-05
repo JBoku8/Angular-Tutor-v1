@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { StoreModule } from '@ngrx/store';
 
 import { ArticleModule } from './articles/article.module';
 import { AuthModule } from './auth/auth.module';
@@ -24,6 +25,10 @@ import { AddAuthTokenInterceptor } from './core/add-auth-token.interceptor';
 
 import { firebaseConfig } from '../firebaseConfig';
 
+// reducer
+import { counterReducer } from './home/state/counter.reducer';
+import { languageReducer } from './ngrx/state/language.reducer';
+
 // tree shaking
 @NgModule({
   declarations: [AppComponent, HomeComponent, PageNotFoundComponent],
@@ -37,6 +42,13 @@ import { firebaseConfig } from '../firebaseConfig';
     CoreModule,
     ArticleModule,
     AuthModule,
+    StoreModule.forRoot(
+      {
+        counter: counterReducer,
+        app: languageReducer,
+      },
+      {}
+    ),
     RouterModule.forRoot([
       {
         path: 'products',

@@ -33,6 +33,7 @@
           >Articles</a
         >
       </div>
+
       <div
         class="navbar-nav"
         *ngIf="(fireAuthService.currentUser$ | async)?.uid"
@@ -53,6 +54,7 @@
           Log Out
         </button>
       </div>
+
       <div
         class="navbar-nav"
         *ngIf="!(fireAuthService.currentUser$ | async)?.uid"
@@ -69,6 +71,16 @@
           routerLinkActive="active"
           >Sign Up</a
         >
+      </div>
+      <div class="navbar-nav">
+        <button
+          class="btn"
+          *ngFor="let lang of langs"
+          (click)="onChangeLanguage(lang)"
+          [class.btn-dark]="lang === (activeLang$ | async)?.activeLang"
+        >
+          {{ lang }}
+        </button>
       </div>
     </div>
   </div>
