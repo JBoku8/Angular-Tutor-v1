@@ -1,43 +1,57 @@
 <div class="container">
-  <h2>Home Page</h2>
-  <ul>
-    <li>
-      <a
-        [routerLink]="['/articles']"
-        [queryParams]="{
-          pageSize: 30,
-          page: 1,
-          qInTitle: 'google',
-          sortBy: 'relevancy'
-        }"
-        >Google News</a
-      >
-    </li>
-    <li>
-      <a
-        [routerLink]="['/articles']"
-        [queryParams]="{
-          pageSize: 15,
-          page: 1,
-          qInTitle: 'facebook',
-          sortBy: 'popularity'
-        }"
-        >Facebook News</a
-      >
-    </li>
-    <li>
-      <a
-        [routerLink]="['/articles']"
-        [queryParams]="{
-          pageSize: 10,
-          page: 1,
-          qInTitle: 'apple',
-          sortBy: 'publishedAt'
-        }"
-        >Apple News</a
-      >
-    </li>
-  </ul>
+  <h2 class="text-muted">Home Page</h2>
+  <div class="row">
+    <div class="col-2">
+      <ul>
+        <li>
+          <a
+            [routerLink]="['/articles']"
+            [queryParams]="{
+              pageSize: 30,
+              page: 1,
+              qInTitle: 'google',
+              sortBy: 'relevancy'
+            }"
+            >Google News</a
+          >
+        </li>
+        <li>
+          <a
+            [routerLink]="['/articles']"
+            [queryParams]="{
+              pageSize: 15,
+              page: 1,
+              qInTitle: 'facebook',
+              sortBy: 'popularity'
+            }"
+            >Facebook News</a
+          >
+        </li>
+        <li>
+          <a
+            [routerLink]="['/articles']"
+            [queryParams]="{
+              pageSize: 10,
+              page: 1,
+              qInTitle: 'apple',
+              sortBy: 'publishedAt'
+            }"
+            >Apple News</a
+          >
+        </li>
+      </ul>
+    </div>
 
+    <div class="col-8">
+      <h3 class="text-muted">
+        {{ translated.title }} - {{ (counter$ | async)?.count }}
+      </h3>
+      <button class="btn btn-success" (click)="onIncrement()">Increment</button>
+      <button class="btn btn-danger me-1 ms-1" (click)="onReset()">
+        Reset
+      </button>
+      <button class="btn btn-primary" (click)="onDecrement()">Decrement</button>
+    </div>
+  </div>
   <!-- <app-articles></app-articles> -->
 </div>
