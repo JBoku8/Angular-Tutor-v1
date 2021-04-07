@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { IProduct, ITodo } from './product';
+import { IProduct } from './product';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -35,9 +35,5 @@ export class ProductService {
         rating: 3,
       },
     ];
-  }
-
-  getTodos(): Observable<ITodo[]> {
-    return this.http.get<ITodo[]>(`${this._baseURL}/todos?_start=0&_limit=10`);
   }
 }

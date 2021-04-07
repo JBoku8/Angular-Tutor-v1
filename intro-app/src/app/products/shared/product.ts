@@ -7,13 +7,6 @@ export interface IProduct {
   // addPrice(value: number): number;
 }
 
-export interface ITodo {
-  userId: number;
-  id: number;
-  title: string;
-  completed: boolean;
-}
-
 export class Product implements IProduct {
   imageUrl: string = '';
   productCode: string = '';

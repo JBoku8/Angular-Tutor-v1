@@ -1,10 +1,20 @@
 import { Component, OnInit, OnDestroy, OnChanges } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Store } from '@ngrx/store';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FilterForm } from '../data/filter-form-shape.interface';
 
-import { IArticle, IArticleResponse, IArticleResponseError } from './article';
+import {
+  IArticle,
+  IArticleResponse,
+  IArticleResponseError,
+} from './shared/article';
 import { ArticleService } from './article.service';
+import {
+  getArticlesStateSelector,
+  getArticlesSelector,
+} from './state/article.selectors';
+import { setArticlesAction } from './state/article.actions';
 
 @Component({
   selector: 'app-articles',
@@ -18,8 +28,13 @@ export class ArticlesComponent implements OnInit, OnChanges, OnDestroy {
   constructor(
     private _articleService: ArticleService,
     private route: ActivatedRoute,
-    private router: Router
-  ) {}
+    private router: Router,
+    private store: Store
+  ) {
+    this.store.select(getArticlesStateSelector).subscribe((data) => {
+      console.log(data);
+    });
+  }
 
   ngOnInit(): void {
     const result: IArticleResponse = this.route.snapshot.data[
@@ -27,6 +42,8 @@ export class ArticlesComponent implements OnInit, OnChanges, OnDestroy {
     ];
 
     this.articles = result.articles;
+
+    this.store.dispatch(setArticlesAction({ articles: result.articles }));
   }
 
   ngOnChanges(): void {

@@ -3,7 +3,11 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { tap, catchError, map } from 'rxjs/operators';
 
-import { IArticleResponse, IArticle, IArticleResponseError } from './article';
+import {
+  IArticleResponse,
+  IArticle,
+  IArticleResponseError,
+} from './shared/article';
 import { FilterForm } from '../data/filter-form-shape.interface';
 
 import { BASE_API_URL } from '../../config';
