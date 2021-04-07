@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { StoreModule } from '@ngrx/store';
 
 import { PublicModule } from '../public/public.module';
 
@@ -12,6 +13,7 @@ import { ProductListComponent } from './product-list/product-list.component';
 
 import { AuthGuard } from '../auth.guard';
 import { ConvertToSpace } from '../shared/pipes/convertToSpace.pipe';
+import { productReducer } from './state/product.reducer';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,7 @@ import { ConvertToSpace } from '../shared/pipes/convertToSpace.pipe';
     CommonModule,
     FormsModule,
     PublicModule,
+    StoreModule.forFeature('products', productReducer),
     RouterModule.forChild([
       {
         path: '',

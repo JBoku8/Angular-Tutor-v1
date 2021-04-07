@@ -38,7 +38,10 @@
         />
       </td>
       <td>
-        <a [routerLink]="['edit/', item.productCode]">
+        <a
+          [routerLink]="['edit/', item.productCode]"
+          (click)="onProductEdit(item)"
+        >
           {{ item.productName | lowercase }}
         </a>
       </td>

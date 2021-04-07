@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { StoreModule } from '@ngrx/store';
 
 import { ArticlesComponent } from './articles.component';
 import { ArticleCardComponent } from './article-card/article-card.component';
@@ -10,6 +11,7 @@ import { ArticleResolverService } from './article-resolver.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ArticleHeaderInterceptor } from './add-header.interceptor.service';
 import { AuthGuard } from '../auth.guard';
+import { articleReducer } from './state/article.reducer';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,7 @@ import { AuthGuard } from '../auth.guard';
   imports: [
     CommonModule,
     FormsModule,
+    StoreModule.forFeature('articles', articleReducer),
     RouterModule.forChild([
       {
         path: 'articles/:title',

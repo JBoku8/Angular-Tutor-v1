@@ -1,6 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { IProduct, ITodo } from '../shared/product';
+import { Store } from '@ngrx/store';
+import { IProduct } from '../shared/product';
 import { ProductService } from '../shared/product.service';
+import { setProductsAction, editProductAction } from '../state/product.actions';
+import {
+  getProductsSelector,
+  getProductsFeatureSelector,
+} from '../state/product.selectors';
 
 @Component({
   selector: 'app-product-list',
@@ -13,20 +19,23 @@ export class ProductListComponent implements OnInit, OnDestroy {
   imageHeight: number = 100;
   filteredProducts: IProduct[] = [];
   productList: IProduct[] = [];
-  todoList: ITodo[] = [];
 
-  constructor(private _productService: ProductService) {
+  constructor(private _productService: ProductService, private _store: Store) {
     // set class default values
+    this._store.dispatch(
+      setProductsAction({ data: this._productService.getProducts() })
+    );
   }
 
   ngOnInit(): void {
     // ajax calls
-    this.productList = this._productService.getProducts();
-    this.filterValue = '';
+    // this.productList = this._productService.getProducts();
 
-    this._productService.getTodos().subscribe((data: ITodo[]) => {
-      this.todoList = data;
+    this._store.select(getProductsSelector).subscribe((result) => {
+      this.productList = result;
     });
+
+    this.filterValue = '';
   }
 
   // მხოლოდ get ნიშნავს read-only თვისებას
@@ -55,7 +64,11 @@ export class ProductListComponent implements OnInit, OnDestroy {
     console.log(message);
   }
 
+  onProductEdit(selectedProduct: IProduct): void {
+    this._store.dispatch(editProductAction({ product: selectedProduct }));
+  }
+
   ngOnDestroy(): void {}
 }
 
-// Singleton Deisgn pattern
+// Singleton Design pattern

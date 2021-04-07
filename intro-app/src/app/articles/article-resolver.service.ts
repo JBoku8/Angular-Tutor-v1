@@ -7,7 +7,7 @@ import {
   RouterStateSnapshot,
 } from '@angular/router';
 
-import { IArticleResponse, IArticleResponseError } from './article';
+import { IArticleResponse, IArticleResponseError } from './shared/article';
 import { ArticleService } from './article.service';
 import { FilterForm } from '../data/filter-form-shape.interface';
 

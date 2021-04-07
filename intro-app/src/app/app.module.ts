@@ -28,6 +28,9 @@ import { firebaseConfig } from '../firebaseConfig';
 // reducer
 import { counterReducer } from './home/state/counter.reducer';
 import { languageReducer } from './ngrx/state/language.reducer';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
+import { AppState } from './ngrx/appState';
 
 // tree shaking
 @NgModule({
@@ -42,13 +45,17 @@ import { languageReducer } from './ngrx/state/language.reducer';
     CoreModule,
     ArticleModule,
     AuthModule,
-    StoreModule.forRoot(
+    StoreModule.forRoot<AppState>(
       {
         counter: counterReducer,
         app: languageReducer,
       },
       {}
     ),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+      logOnly: environment.production,
+    }),
     RouterModule.forRoot([
       {
         path: 'products',

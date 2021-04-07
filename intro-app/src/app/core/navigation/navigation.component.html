@@ -34,53 +34,56 @@
         >
       </div>
 
-      <div
-        class="navbar-nav"
-        *ngIf="(fireAuthService.currentUser$ | async)?.uid"
-      >
-        <a
-          class="nav-link"
-          [routerLink]="['/auth/dashboard']"
-          routerLinkActive="active"
-          >Dashboard</a
-        >
-        <a
-          class="nav-link"
-          [routerLink]="['/auth/account']"
-          routerLinkActive="active"
-          >Account</a
-        >
-        <button class="btn btn-primary" (click)="onLogOut($event)">
-          Log Out
-        </button>
-      </div>
-
-      <div
-        class="navbar-nav"
-        *ngIf="!(fireAuthService.currentUser$ | async)?.uid"
-      >
-        <a
-          class="nav-link"
-          [routerLink]="['/auth/sign-in']"
-          routerLinkActive="active"
-          >Sign In</a
-        >
-        <a
-          class="nav-link"
-          [routerLink]="['/auth/sign-up']"
-          routerLinkActive="active"
-          >Sign Up</a
-        >
-      </div>
       <div class="navbar-nav">
-        <button
-          class="btn"
-          *ngFor="let lang of langs"
-          (click)="onChangeLanguage(lang)"
-          [class.btn-dark]="lang === (activeLang$ | async)?.activeLang"
+        <div
+          class="navbar-nav"
+          *ngIf="(fireAuthService.currentUser$ | async)?.uid"
         >
-          {{ lang }}
-        </button>
+          <a
+            class="nav-link"
+            [routerLink]="['/auth/dashboard']"
+            routerLinkActive="active"
+            >Dashboard</a
+          >
+          <a
+            class="nav-link"
+            [routerLink]="['/auth/account']"
+            routerLinkActive="active"
+            >Account</a
+          >
+          <button class="btn btn-primary" (click)="onLogOut($event)">
+            Log Out
+          </button>
+        </div>
+
+        <div
+          class="navbar-nav"
+          *ngIf="!(fireAuthService.currentUser$ | async)?.uid"
+        >
+          <a
+            class="nav-link"
+            [routerLink]="['/auth/sign-in']"
+            routerLinkActive="active"
+            >Sign In</a
+          >
+          <a
+            class="nav-link"
+            [routerLink]="['/auth/sign-up']"
+            routerLinkActive="active"
+            >Sign Up</a
+          >
+        </div>
+
+        <div class="ms-2">
+          <button
+            class="btn"
+            *ngFor="let lang of langs"
+            (click)="onChangeLanguage(lang)"
+            [class.btn-dark]="lang === (activeLang$ | async)?.activeLang"
+          >
+            {{ lang }}
+          </button>
+        </div>
       </div>
     </div>
   </div>
